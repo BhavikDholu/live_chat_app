@@ -63,7 +63,12 @@ function ChatBoard(props) {
    }
 
   useEffect(() => {
-    socket = io(ENDPOINT);
+    socket = io(ENDPOINT, {
+      withCredentials: true,
+      extraHeaders: {
+        "my-custom-header": "https://chat-api-pearl.vercel.app/",
+      },
+    });
     socket.emit("create", userDetail);
     socket.on("connection", () => setsocketConnectivity(true))
   }, []);

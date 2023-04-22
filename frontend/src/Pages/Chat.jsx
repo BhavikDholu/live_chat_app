@@ -36,23 +36,25 @@ function Chat() {
   const toast = useToast();
 
   const getAlluser = async (token) => {
-    let res = await axios.get("https://chat-api-pearl.vercel.app/user", {
+    if(token){let res = await axios.get("https://chat-api-pearl.vercel.app/user", {
       headers: {
         Authorization: token,
       },
     });
 
-    return res.data;
+    return res.data;}
   };
 
   const getAllChats = async (token) => {
-    let res = await axios.get("https://chat-api-pearl.vercel.app/chat/get", {
-      headers: {
-        Authorization: token,
-      },
-    });
+    if (token) {
+      let res = await axios.get("https://chat-api-pearl.vercel.app/chat/get", {
+        headers: {
+          Authorization: token,
+        },
+      });
 
-    return res.data;
+      return res.data;
+    }
   };
 
   const handleSingleChat = (oppUserId) => {
@@ -129,7 +131,7 @@ function Chat() {
       getAlluser(userDetail.token).then((res) => setUsers(res));
       getAllChats(userDetail.token).then((res) => setChats(res));
     }
-  }, [SelectChat]);
+  }, []);
 
   return (
     <Box display={"flex"} justifyContent={"space-evenly"} mt="20px">

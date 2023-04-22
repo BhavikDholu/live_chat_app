@@ -70,15 +70,17 @@ function ChatBoard(props) {
    }
 
 
-  useEffect(()=>{
+  useEffect(() => {
     socket.on("message recieved", (newMessageRecieved) => {
-       if(!selectedChatCompare || selectedChatCompare._id !== newMessageRecieved.chat._id){
-
-       }else{
+      if (
+        !selectedChatCompare ||
+        selectedChatCompare._id !== newMessageRecieved.chat._id
+      ) {
+      } else {
         setAllMsg([...allMsg, newMessageRecieved]);
-       }
+      }
     });
-  })
+  }, [msg]);
 
   useEffect(()=>{
     getMessages();

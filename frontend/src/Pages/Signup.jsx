@@ -40,9 +40,7 @@ const Signup = () => {
     e.preventDefault();
     
      axios
-       .post(`https://chat-api-pearl.vercel.app/user/register`, {
-         ...detail,
-       })
+       .post(`https://chat-api-pearl.vercel.app/user/register`, detail)
        .then((res) =>
          toast({
            description: res.data.msg,

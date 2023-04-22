@@ -38,9 +38,7 @@ const Login = () => {
   const handleLogin =  (e) => {
     e.preventDefault();
     axios
-      .post(`https://chat-api-pearl.vercel.app/user/login`, {
-        ...detail,
-      })
+      .post(`https://chat-api-pearl.vercel.app/user/login`, detail)
       .then((res) => {
         toast({
           description: res.data.msg,

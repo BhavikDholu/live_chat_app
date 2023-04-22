@@ -129,7 +129,7 @@ function Chat() {
       getAlluser(userDetail.token).then((res) => setUsers(res));
       getAllChats(userDetail.token).then((res) => setChats(res));
     }
-  }, []);
+  }, [SelectChat]);
 
   return (
     <Box display={"flex"} justifyContent={"space-evenly"} mt="20px">

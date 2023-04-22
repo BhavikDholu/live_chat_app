@@ -14,6 +14,13 @@ function ChatBoard(props) {
   const [loading,setLoading] = useState(false);
   const [socketConnectivity, setsocketConnectivity] = useState(false)
   
+
+  useEffect(() => {
+    socket = io(ENDPOINT);
+    socket.emit("create", userDetail);
+    socket.on("connection", () => setsocketConnectivity(true));
+  }, []);
+
   const handleSend = async() =>{
     try {
       let res = await axios.post(
@@ -62,18 +69,6 @@ function ChatBoard(props) {
     setMsg(val);
    }
 
-  useEffect(() => {
-    socket = io(ENDPOINT, {
-      withCredentials: true,
-      extraHeaders: {
-        "my-custom-header": "https://chat-api-pearl.vercel.app/",
-      },
-    });
-    socket.emit("create", userDetail);
-    socket.on("connection", () => setsocketConnectivity(true))
-  }, []);
-
-  
 
   useEffect(()=>{
     socket.on("message recieved", (newMessageRecieved) => {
